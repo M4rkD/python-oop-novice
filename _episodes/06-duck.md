@@ -92,7 +92,7 @@ fractal.
 ~~~
 %matplotlib inline
 from numpy import angle, linspace, newaxis, pi
-from matplotlib.pyplot import colorbar, subplots
+from matplotlib.pyplot import colorbar, show, subplots
 
 def complex_linspace(lower, upper, num_real, num_imag):
     real_space = linspace(lower.real, upper.real, num_real)
@@ -120,6 +120,8 @@ cbar.set_label(r'$\arg(z_n)$')
 cbar.ax.set_yticklabels((r'$-\frac{2\pi}{3}$', '0', r'$\frac{2\pi}{3}$'))
 ax.set_xlabel(r'$\operatorname{Re}(z_0)$')
 ax.set_ylabel(r'$\operatorname{Im}(z_0)$')
+
+show()
 ~~~
 {: .language-python}
 
@@ -474,7 +476,6 @@ make it more complicated to get a view of the big picture.
 >>         fig, ax = subplots()
 >>         x = linspace(self.x_min, self.x_max, 1000)
 >>         ax.plot(x, self.function(x), color=self.color, linewidth=self.linewidth)
->>         fig.show()
 >> ~~~
 >> {: .language-python}
 >>
@@ -482,10 +483,13 @@ make it more complicated to get a view of the big picture.
 >>
 >> ~~~
 >> from numpy import sin
+>>
 >> sin_plotter = FunctionPlotter(sin)
 >> quadratic_plotter = FunctionPlotter(Quadratic(1, -1, 1), color='blue')
 >> sin_plotter.plot()
 >> quadratic_plotter.plot()
+>>
+>> show()
 >> ~~~
 >> {: .language-python}
 > {: .solution}

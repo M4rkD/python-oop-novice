@@ -24,7 +24,7 @@ If we wanted to plot a variety of quadratic functions, with a
 consistent set of styles, we could define a class that does this:
 
 ~~~
-from matplotlib.pyplot import subplots
+from matplotlib.pyplot import show, subplots
 from numpy import linspace
 
 class QuadraticPlotter:
@@ -83,6 +83,8 @@ we have yet to use it. Let's do that now.
 plotter = QuadraticPlotter()
 plotter.plot(1, 2, 3)
 plotter.plot(1, 0, -1)
+
+show()
 ~~~
 {: .language-python}
 
@@ -119,6 +121,8 @@ quadratic_plot(3, -5, 5)
 quadratic_plot(-3, 1, 0, **thick_blue)
 quadratic_plot(2, 10, 2)
 quadratic_plot(-2, 13, 4, **thick_blue)
+
+show()
 ~~~
 {: .language-python}
 
@@ -142,6 +146,8 @@ plotter.plot(3, -5, 5)
 blue_plotter.plot(-3, 1, 0)
 plotter.plot(2, 10, 2)
 blue_plotter.plot(-2, 13, 4)
+
+show()
 ~~~
 {: .language-python}
 
@@ -208,6 +214,8 @@ Line width of blue plotter is 5
 >>
 >> narrow_plot.plot(3, 2, 1)
 >> wide_plot.plot(3, 2, 1)
+>>
+>> show()
 >> ~~~
 >> {: .language-python}
 > {: .solution}
@@ -404,6 +412,8 @@ class QuadraticPlotter:
 
 pink_plotter = QuadraticPlotter(color='magenta', linewidth=3)
 pink_plotter.plot(0, 1, 0)
+
+show()
 ~~~
 {: .language-python}
 
@@ -452,6 +462,8 @@ usable, rather than deferring these errors to a long way down the line.
 >>
 >> narrow_plot.plot(3, 2, 1)
 >> wide_plot.plot(3, 2, 1)
+>>
+>> show()
 >> ~~~
 >> {: .language-python}
 > {: .solution}

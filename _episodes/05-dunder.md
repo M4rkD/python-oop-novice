@@ -332,7 +332,7 @@ class to be called like functions. For example, returning to the
 ~~~
 from numpy import linspace, sin
 from matplotlib.colors import is_color_like
-from matplotlib.pyplot import subplots
+from matplotlib.pyplot import show, subplots
 
 class FunctionPlotter:
     def __init__(self, color='red', linewidth=1, x_min=-10, x_max=10):
@@ -363,6 +363,8 @@ class FunctionPlotter:
 
 plotter = FunctionPlotter()
 plotter(sin)
+
+show()
 ~~~
 {: .language-python}
 
