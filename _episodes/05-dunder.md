@@ -81,25 +81,29 @@ class Triangle(Polygon):
         return cls([side_length] * 3)
 
     def area(self):
-        '''Returns the area of the triangle.'''
+        """Returns the area of the triangle."""
         a, b, c = self.side_lengths
         p = (a + b + c) / 2
         return (p * (p - a) * (p - b) * (p - c)) ** 0.5
 
     def __eq__(self, other):
-        '''Returns True if the triangle self and the triangle other
-        are the same triangle'''
+        """Returns True if the triangle self and the triangle other
+        are the same triangle"""
         if not isinstance(other, Triangle):
             return False
         else:
             # Check all permutations
             if self.side_lengths == other.side_lengths:
                 return True
-            elif (self.side_lengths[1:] + [self.side_lengths[1]] ==
-                    other.side_lengths):
+            elif (
+                self.side_lengths[1:] + [self.side_lengths[0]] ==
+                other.side_lengths
+            ):
                 return True
-            elif ([self.side_lengths[2]] + self.side_lengths[:-1] ==
-                    other.side_lengths):
+            elif (
+                [self.side_lengths[2]] + self.side_lengths[:2] ==
+                other.side_lengths
+            ):
                 return True
             return False
 
@@ -149,7 +153,7 @@ could look like:
 
 ~~~
     def __repr__(self):
-        return f'Triangle({self.side_lengths})'
+        return f"Triangle({self.side_lengths})"
 ~~~
 {: .language-python}
 
@@ -248,13 +252,13 @@ class Triangle(Polygon):
 >> ~~~
 >>     @classmethod
 >>     def random(cls):
->>         '''Returns a triangle with three random length sides in the
+>>         """Returns a triangle with three random length sides in the
 >>         range [0, 1).
 >>         If the sum of the two short sides isn't longer than the
 >>         long side (and so the triangle doesn't close), then try
 >>         again. There is an infinitesimal probability that this
 >>         method will never return, as randomness keeps delivering
->>         invalid triangles.'''
+>>         invalid triangles."""
 >>
 >>         random_triangle = cls([random(), random(), random()])
 >>         while isinstance(random_triangle.area(), complex):
@@ -294,7 +298,7 @@ class Triangle(Polygon):
 >>         self.error = error
 >>
 >>     def __repr__(self):
->>         return f'{self.centre} ± {self.error}'
+>>         return f"{self.centre} ± {self.error}"
 >>
 >>     def __add__(self, other):
 >>         centre = self.centre + other.centre
@@ -335,7 +339,7 @@ from matplotlib.colors import is_color_like
 from matplotlib.pyplot import show, subplots
 
 class FunctionPlotter:
-    def __init__(self, color='red', linewidth=1, x_min=-10, x_max=10):
+    def __init__(self, color="red", linewidth=1, x_min=-10, x_max=10):
         self.color = color
         self.linewidth = linewidth
         self.x_min = x_min
@@ -351,9 +355,9 @@ class FunctionPlotter:
         self._color = color
 
     def plot(self, function):
-        '''Plot a function of a single argument.
+        """Plot a function of a single argument.
         The line is plotted in the colour specified by color, and with width
-        linewidth.'''
+        linewidth."""
         fig, ax = subplots()
         x = linspace(self.x_min, self.x_max, 1000)
         ax.plot(x, function(x), color=self._color, linewidth=self.linewidth)

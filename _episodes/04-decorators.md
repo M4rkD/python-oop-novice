@@ -198,7 +198,7 @@ a problem when we try and decorate a function that takes arguments:
 >>
 >>     @check_consistency
 >>     def perimeter(self):
->>         '''Returns the perimeter of the polygon.'''
+>>         """Returns the perimeter of the polygon."""
 >>         return sum(self.side_lengths)
 >>
 >> class Triangle(Polygon):
@@ -209,7 +209,7 @@ a problem when we try and decorate a function that takes arguments:
 >>
 >>     @check_consistency
 >>     def area(self):
->>         '''Returns the area of the triangle.'''
+>>         """Returns the area of the triangle."""
 >>         a, b, c = self.side_lengths
 >>         p = (a + b + c) / 2
 >>         return (p * (p - a) * (p - b) * (p - c)) ** 0.5
@@ -250,7 +250,7 @@ class Triangle(Polygon):
         return cls([side_length] * 3)
 
     def area(self):
-        '''Returns the area of the triangle.'''
+        """Returns the area of the triangle."""
         a, b, c = self.side_lengths
         p = (a + b + c) / 2
         return (p * (p - a) * (p - b) * (p - c)) ** 0.5
@@ -343,7 +343,7 @@ print(a_triangle.area())
 
 ~~~
      11     def area(self):
-     12         '''Returns the area of the triangle.'''
+     12         """Returns the area of the triangle."""
 ---> 13         a, b, c = self.side_lengths
      14         p = (a + b + c) / 2
      15         return (p * (p - a) * (p - b) * (p - c)) ** 0.5
@@ -359,7 +359,7 @@ can't be unpacked to three variables. Similarly,
 
 ~~~
 a_polygon = Polygon([1, 2, 3, 4, 5])
-a_polygon.side_lengths = 'spam and eggs'
+a_polygon.side_lengths = "spam and eggs"
 a_polygon.perimeter()
 ~~~
 {: .language-python}
@@ -368,12 +368,12 @@ a_polygon.perimeter()
 TypeError                                 Traceback (most recent call last)
 <ipython-input-50-9b8ffd74de36> in <module>()
       1 a_polygon = Polygon([1, 2, 3, 4, 5])
-      2 a_polygon.side_lengths = 'spam and eggs'
+      2 a_polygon.side_lengths = "spam and eggs"
 ----> 3 a_polygon.perimeter()
 
 <ipython-input-49-5ae60040e7be> in perimeter(self)
      10     def perimeter(self):
-     11         '''Returns the perimeter of the polygon.'''
+     11         """Returns the perimeter of the polygon."""
 ---> 12         return sum(self.side_lengths)
      13
      14
@@ -403,7 +403,7 @@ class Polygon:
         self._side_lengths = filtered_side_lengths
 
     def perimeter(self):
-        '''Returns the perimeter of the polygon.'''
+        """Returns the perimeter of the polygon."""
         return sum(self._side_lengths)
 
     @property
@@ -434,7 +434,7 @@ However, we can't assign to it without referring to the private
 `_side_lengths`:
 
 ~~~
-a_polygon.side_lengths = 'spam and eggs'
+a_polygon.side_lengths = "spam and eggs"
 ~~~
 {: .language-python}
 
@@ -442,7 +442,7 @@ a_polygon.side_lengths = 'spam and eggs'
 AttributeError                            Traceback (most recent call last)
 <ipython-input-57-9b8ffd74de36> in <module>()
       1 a_polygon = Polygon([1, 2, 3, 4, 5])
-----> 2 a_polygon.side_lengths = 'spam and eggs'
+----> 2 a_polygon.side_lengths = "spam and eggs"
       3 a_polygon.perimeter()
 
 AttributeError: can't set attribute
@@ -471,7 +471,7 @@ class Polygon:
         self.side_lengths = side_lengths
 
     def perimeter(self):
-        '''Returns the perimeter of the polygon.'''
+        """Returns the perimeter of the polygon."""
         return sum(self._side_lengths)
 
     @property
@@ -522,7 +522,7 @@ Modified perimeter: 21
 >> from matplotlib.colors import is_color_like
 >>
 >> class FunctionPlotter:
->>     def __init__(self, color='red', linewidth=1, x_min=-10, x_max=10):
+>>     def __init__(self, color="red", linewidth=1, x_min=-10, x_max=10):
 >>         self.color = color
 >>         self.linewidth = linewidth
 >>         self.x_min = x_min
@@ -538,9 +538,9 @@ Modified perimeter: 21
 >>         self._color = color
 >>
 >>     def plot(self, function):
->>         '''Plot a function of a single argument.
+>>         """Plot a function of a single argument.
 >>         The line is plotted in the colour specified by color, and with width
->>         linewidth.'''
+>>         linewidth."""
 >>         fig, ax = subplots()
 >>         x = linspace(self.x_min, self.x_max, 1000)
 >>         ax.plot(x, function(x), color=self._color, linewidth=self.linewidth)

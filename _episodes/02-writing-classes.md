@@ -32,15 +32,19 @@ class QuadraticPlotter:
     linewidth = 1
 
     def plot(self, a, b, c):
-        '''Plot the line a * x ** 2 + b * x + c and output to the screen.
+        """Plot the line a * x ** 2 + b * x + c and output to the screen.
         x runs between -10 and 10, with 1000 intermediary points.
         The line is plotted in the colour specified by color, and with width
-        linewidth.'''
+        linewidth."""
 
         fig, ax = subplots()
         x = linspace(-10, 10, 1000)
-        ax.plot(x, a * x ** 2 + b * x + c,
-                color=self.color, linewidth=self.linewidth)
+        ax.plot(
+            x,
+            a * x ** 2 + b * x + c,
+            color=self.color,
+            linewidth=self.linewidth,
+        )
 ~~~
 {: .language-python}
 
@@ -95,11 +99,11 @@ So far, this hasn't done anything that we couldn't have done with a function
 to perform the setup and then do the plot&mdash;perhaps something like:
 
 ~~~
-def quadratic_plot(a, b, c, color='red', linewidth=1):
-    '''Plot the line a * x ** 2 + b * x + c and output to the screen.
+def quadratic_plot(a, b, c, color="red"", linewidth=1):
+    """Plot the line a * x ** 2 + b * x + c and output to the screen.
     x runs between -10 and 10, with 1000 intermediary points.
     The line is plotted in the colour specified by color, and with width
-    linewidth.'''
+    linewidth."""
 
     fig, ax = subplots()
     x = linspace(-10, 10, 1000)
@@ -115,7 +119,7 @@ the code to become inconsistent.
 We could also use a `dict` to hold the common options:
 
 ~~~
-thick_blue = {'color': 'blue', 'linewidth': 5}
+thick_blue = {"color": "blue", "linewidth": 5}
 
 quadratic_plot(3, -5, 5)
 quadratic_plot(-3, 1, 0, **thick_blue)
@@ -139,7 +143,7 @@ this result:
 
 ~~~
 blue_plotter = QuadraticPlotter()
-blue_plotter.color = 'blue'
+blue_plotter.color = "blue"
 blue_plotter.linewidth = 5
 
 plotter.plot(3, -5, 5)
@@ -191,21 +195,25 @@ Line width of blue plotter is 5
 >>
 >> ~~~
 >> class QuadraticPlotter:
->>    color = 'red'
+>>    color = "red"
 >>    linewidth = 1
 >>    x_min = -10
 >>    x_max = 10
 >>
 >>    def plot(self, a, b, c):
->>        '''Plot the line a * x ** 2 + b * x + c and output to the screen.
+>>        """Plot the line a * x ** 2 + b * x + c and output to the screen.
 >>        x runs between -10 and 10, with 1000 intermediary points.
 >>        The line is plotted in the colour specified by color, and with width
->>        linewidth.'''
+>>        linewidth."""
 >>
 >>        fig, ax = subplots()
 >>        x = linspace(self.x_min, self.x_max, 1000)
->>        ax.plot(x, a * x ** 2 + b * x + c,
->>                color=self.color, linewidth=self.linewidth)
+>>        ax.plot(
+>>            x,
+>>            a * x ** 2 + b * x + c,
+>>            color=self.color,
+>>            linewidth=self.linewidth,
+>>        )
 >>
 >> narrow_plot = QuadraticPlotter()
 >> wide_plot = QuadraticPlotter()
@@ -252,8 +260,17 @@ Line width of blue plotter is 5
 >     return odr_analysis.run()
 >
 >
-> def plot_results(f, fitobj, x, y,
->                  xmin=None, xmax=None, xerr=None, yerr=None, filename=None):
+> def plot_results(
+>     f,
+>     fitobj,
+>     x,
+>     y,
+>     xmin=None,
+>     xmax=None,
+>     xerr=None,
+>     yerr=None,
+>     filename=None,
+> ):
 >     fig, ax = subplots()
 >     if xmin is None:
 >         xmin = min(x)
@@ -261,13 +278,15 @@ Line width of blue plotter is 5
 >         xmax = max(x)
 >
 >     x_range = linspace(xmin, xmax, 1000)
->     ax.plot(x_range, f(fitobj.beta, x_range), label='Fit')
->     ax.errorbar(x, y, xerr=xerr, yerr=yerr, fmt='.', label='Data')
->     ax.set_xlabel(r'$x$')
->     ax.set_ylabel(r'$y$')
->     fig.suptitle(f'Data: $A={fitobj.beta[0]:.02}'
->                  f'\\pm{fitobj.cov_beta[0][0]**0.5:.02}, '
->                  f'B={fitobj.beta[1]:.02}\\pm{fitobj.cov_beta[1][1]**0.5:.02}$')
+>     ax.plot(x_range, f(fitobj.beta, x_range), label="Fit")
+>     ax.errorbar(x, y, xerr=xerr, yerr=yerr, fmt=".", label="Data")
+>     ax.set_xlabel(r"$x$")
+>     ax.set_ylabel(r"$y$")
+>     fig.suptitle(
+>         f"Data: $A={fitobj.beta[0]:.02}"
+>         f"\\pm{fitobj.cov_beta[0][0]**0.5:.02}, "
+>         f"B={fitobj.beta[1]:.02}\\pm{fitobj.cov_beta[1][1]**0.5:.02}$"
+>     )
 >     ax.legend(loc=0, frameon=False)
 >
 >     if filename is not None:
@@ -339,17 +358,28 @@ Line width of blue plotter is 5
 >>
 >>         if self.fit_result is not None:
 >>             x_range = linspace(xmin, xmax, 1000)
->>             ax.plot(x_range, self.fit_form(self.fit_result.beta, x_range),
->>                     label='Fit')
->>             fig.suptitle(f'Data: $A={self.fit_result.beta[0]:.02}'
->>                          f'\\pm{self.fit_result.cov_beta[0][0]**0.5:.02}, '
->>                          f'B={self.fit_result.beta[1]:.02}'
->>                          f'\\pm{self.fit_result.cov_beta[1][1]**0.5:.02}$')
+>>             ax.plot(
+>>                 x_range,
+>>                 self.fit_form(self.fit_result.beta, x_range),
+>>                 label="Fit",
+>>             )
+>>             fig.suptitle(
+>>                 f"Data: $A={self.fit_result.beta[0]:.02}"
+>>                 f"\\pm{self.fit_result.cov_beta[0][0]**0.5:.02}, "
+>>                 f"B={self.fit_result.beta[1]:.02}"
+>>                 f"\\pm{self.fit_result.cov_beta[1][1]**0.5:.02}$"
+>>             )
 >>
->>         ax.errorbar(self.x_data, self.y_data, xerr=self.x_err, yerr=self.y_err,
->>                     fmt='.', label='Data')
->>         ax.set_xlabel(r'$x$')
->>         ax.set_ylabel(r'$y$')
+>>         ax.errorbar(
+>>             self.x_data,
+>>             self.y_data,
+>>             xerr=self.x_err,
+>>             yerr=self.y_err,
+>>             fmt=".",
+>>             label="Data",
+>>         )
+>>         ax.set_xlabel(r"$x$")
+>>         ax.set_ylabel(r"$y$")
 >>         ax.legend(loc=0, frameon=False)
 >>
 >>         if filename is not None:
@@ -407,8 +437,12 @@ class QuadraticPlotter:
 
         fig, ax = subplots()
         x = linspace(-10, 10, 1000)
-        ax.plot(x, a * x ** 2 + b * x + c,
-                color=self.color, linewidth=self.linewidth)
+        ax.plot(
+            x,
+            a * x ** 2 + b * x + c,
+            color=self.color,
+            linewidth=self.linewidth,
+        )
 
 pink_plotter = QuadraticPlotter(color='magenta', linewidth=3)
 pink_plotter.plot(0, 1, 0)
@@ -446,16 +480,20 @@ usable, rather than deferring these errors to a long way down the line.
 >>         self.x_min = x_min
 >>         self.x_max = x_max
 >>
->>    def plot(self, a, b, c):
->>        '''Plot the line a * x ** 2 + b * x + c and output to the screen.
->>        x runs between x_min and x_max, with 1000 intermediary points.
->>        The line is plotted in the colour specified by color, and with width
->>        linewidth.'''
+>>     def plot(self, a, b, c):
+>>         '''Plot the line a * x ** 2 + b * x + c and output to the screen.
+>>         x runs between x_min and x_max, with 1000 intermediary points.
+>>         The line is plotted in the colour specified by color, and with width
+>>         linewidth.'''
 >>
->>        fig, ax = subplots()
->>        x = linspace(self.x_min, self.x_max, 1000)
->>        ax.plot(x, a * x ** 2 + b * x + c,
->>                color=self.color, linewidth=self.linewidth)
+>>         fig, ax = subplots()
+>>         x = linspace(self.x_min, self.x_max, 1000)
+>>         ax.plot(
+>>             x,
+>>             a * x ** 2 + b * x + c,
+>>             color=self.color,
+>>             linewidth=self.linewidth,
+>>         )
 >>
 >> narrow_plot = QuadraticPlotter()
 >> wide_plot = QuadraticPlotter(x_min=-5, x_max=50)
@@ -481,8 +519,17 @@ usable, rather than deferring these errors to a long way down the line.
 >> class FitterPlotter:
 >>     fit_result = None
 >>
->>     def __init__(self, x_data, y_data, x_err=None, y_err=None,
->>                  fit_form=None, num_fit_params=None, xmin=None, xmax=None):
+>>     def __init__(
+>>         self,
+>>         x_data,
+>>         y_data,
+>>         x_err=None,
+>>         y_err=None,
+>>         fit_form=None,
+>>         num_fit_params=None,
+>>         xmin=None,
+>>         xmax=None,
+>>     ):
 >>         self.x_data = x_data
 >>         self.y_data = y_data
 >>         self.x_err = x_err
@@ -520,15 +567,26 @@ usable, rather than deferring these errors to a long way down the line.
 >>
 >>         if self.fit_result is not None:
 >>             x_range = linspace(xmin, xmax, 1000)
->>             ax.plot(x_range, self.fit_form(self.fit_result.beta, x_range),
->>                     label='Fit')
->>             fig.suptitle(f'Data: $A={self.fit_result.beta[0]:.02}'
->>                          f'\\pm{self.fit_result.cov_beta[0][0]**0.5:.02}, '
->>                          f'B={self.fit_result.beta[1]:.02}'
->>                          f'\\pm{self.fit_result.cov_beta[1][1]**0.5:.02}$')
+>>             ax.plot(
+>>                 x_range,
+>>                 self.fit_form(self.fit_result.beta, x_range),
+>>                 label='Fit',
+>>             )
+>>             fig.suptitle(
+>>                 f'Data: $A={self.fit_result.beta[0]:.02}'
+>>                 f'\\pm{self.fit_result.cov_beta[0][0]**0.5:.02}, '
+>>                 f'B={self.fit_result.beta[1]:.02}'
+>>                 f'\\pm{self.fit_result.cov_beta[1][1]**0.5:.02}$'
+>>             )
 >>
->>         ax.errorbar(self.x_data, self.y_data, xerr=self.x_err, yerr=self.y_err,
->>                     fmt='.', label='Data')
+>>         ax.errorbar(
+>>             self.x_data,
+>>             self.y_data,
+>>             xerr=self.x_err,
+>>             yerr=self.y_err,
+>>             fmt='.',
+>>             label='Data',
+>>         )
 >>         ax.set_xlabel(r'$x$')
 >>         ax.set_ylabel(r'$y$')
 >>         ax.legend(loc=0, frameon=False)
@@ -543,7 +601,7 @@ usable, rather than deferring these errors to a long way down the line.
 >>     x_err=[0.2, 0.1, 0.3, 0.2, 0.5, 0.3],
 >>     y_err=[0.4, 0.4, 0.1, 0.2, 0.1, 0.4],
 >>     fit_form=linear,
->>     num_fit_params=2
+>>     num_fit_params=2,
 >> )
 >>
 >> fitterplotter.odr_fit()

@@ -98,7 +98,7 @@ class Polygon:
         self.side_lengths = side_lengths
 
     def perimeter(self):
-        '''Returns the perimeter of the polygon.'''
+        """Returns the perimeter of the polygon."""
         return sum(self.side_lengths)
 
 some_shape = Polygon([1, 2, 3, 4, 5])
@@ -125,7 +125,7 @@ class Triangle(Polygon):
         self.side_lengths = side_lengths
 
     def area(self):
-        '''Returns the area of the triangle.'''
+        """Returns the area of the triangle."""
         a, b, c = self.side_lengths
         p = self.perimeter() / 2
         return (p * (p - a) * (p - b) * (p - c)) ** 0.5
@@ -175,7 +175,7 @@ class Triangle(Polygon):
         super().__init__(side_lengths)
 
     def area(self):
-        '''Returns the area of the triangle.'''
+        """Returns the area of the triangle."""
         a, b, c = self.side_lengths
         p = (a + b + c) / 2
         return (p * (p - a) * (p - b) * (p - c)) ** 0.5
@@ -253,7 +253,7 @@ increasingly complex and build up functionality in layers.
 >>         self.side_lengths = filtered_side_lengths
 >>
 >>     def perimeter(self):
->>         '''Returns the perimeter of the polygon.'''
+>>         """Returns the perimeter of the polygon."""
 >>         return sum(self.side_lengths)
 >>
 >>  class Triangle(Polygon):
@@ -263,7 +263,7 @@ increasingly complex and build up functionality in layers.
 >>         assert len(self.side_lengths) == 3
 >>
 >>     def area(self):
->>         '''Returns the area of the triangle.'''
+>>         """Returns the area of the triangle."""
 >>         a, b, c = self.side_lengths
 >>         p = (a + b + c) / 2
 >>         return (p * (p - a) * (p - b) * (p - c)) ** 0.5
@@ -345,7 +345,7 @@ increasingly complex and build up functionality in layers.
 >> from matplotlib.colors import is_color_like
 >>
 >> class PolynomialPlotter:
->>     def __init__(self, color='red', linewidth=1, x_min=-10, x_max=10):
+>>     def __init__(self, color="red", linewidth=1, x_min=-10, x_max=10):
 >>         assert is_color_like(color)
 >>         self.color = color
 >>         self.linewidth = linewidth
@@ -353,22 +353,26 @@ increasingly complex and build up functionality in layers.
 >>         self.x_max = x_max
 >>
 >>     def polynomial(self, x, coefficients):
->>         '''For a given x and list of n+1 coefficients [a, b, c, d, ...],
->>         returns the polynomial f(x) = ax^n + bx^(n-1) + cx^(n-2) + ...'''
+>>         """For a given x and list of n+1 coefficients [a, b, c, d, ...],
+>>         returns the polynomial f(x) = ax^n + bx^(n-1) + cx^(n-2) + ..."""
 >>         result = 0
 >>         for coefficient in coefficients:
 >>             result = result * x + coefficient
 >>         return result
 >>
 >>     def plot(self, coefficients):
->>         '''Given the list of coefficients [a, b, c, d, ...],
+>>         """Given the list of coefficients [a, b, c, d, ...],
 >>         plot the polynomial f(x) = ax^n + bx^(n-1) + cx^(n-2) + ... .
 >>         The line is plotted in the colour specified by color, and with width
->>         linewidth.'''
+>>         linewidth."""
 >>         fig, ax = subplots()
 >>         x = linspace(self.x_min, self.x_max, 1000)
->>         ax.plot(x, self.polynomial(x, coefficients),
->>                 color=self.color, linewidth=self.linewidth)
+>>         ax.plot(
+>>             x,
+>>             self.polynomial(x, coefficients),
+>>             color=self.color,
+>>             linewidth=self.linewidth,
+>>         )
 >>
 >> class QuadraticPlotter(PolynomialPlotter):
 >>     def plot(self, a, b, c):
@@ -387,7 +391,7 @@ increasingly complex and build up functionality in layers.
 >>
 >> ~~~
 >> class FunctionPlotter:
->>     def __init__(self, color='red', linewidth=1, x_min=-10, x_max=10):
+>>     def __init__(self, color="red", linewidth=1, x_min=-10, x_max=10):
 >>         assert is_color_like(color)
 >>         self.color = color
 >>         self.linewidth = linewidth
@@ -395,9 +399,9 @@ increasingly complex and build up functionality in layers.
 >>         self.x_max = x_max
 >>
 >>     def plot(self, function):
->>         '''Plot a function of a single argument.
+>>         """Plot a function of a single argument.
 >>         The line is plotted in the colour specified by color, and with width
->>         linewidth.'''
+>>         linewidth."""
 >>         fig, ax = subplots()
 >>         x = linspace(self.x_min, self.x_max, 1000)
 >>         ax.plot(x, function(x), color=self.color, linewidth=self.linewidth)
@@ -405,13 +409,13 @@ increasingly complex and build up functionality in layers.
 >>
 >> class PolynomialPlotter(FunctionPlotter):
 >>     def plot(self, coefficients):
->>         '''Given the list of coefficients [a, b, c, d, ...],
+>>         """Given the list of coefficients [a, b, c, d, ...],
 >>         plot the polynomial f(x) = ax^n + bx^(n-1) + cx^(n-2) + ... .
 >>         The line is plotted in the colour specified by color, and with width
->>         linewidth.'''
+>>         linewidth."""
 >>         def polynomial(x):
->>             '''For a given x and list of n+1 coefficients [a, b, c, d, ...],
->>             returns the polynomial f(x) = ax^n + bx^(n-1) + cx^(n-2) + ...'''
+>>             """For a given x and list of n+1 coefficients [a, b, c, d, ...],
+>>             returns the polynomial f(x) = ax^n + bx^(n-1) + cx^(n-2) + ..."""
 >>             result = 0
 >>             for coefficient in coefficients:
 >>                 result = result * x + coefficient
@@ -421,10 +425,10 @@ increasingly complex and build up functionality in layers.
 >>
 >> class QuadraticPlotter(PolynomialPlotter):
 >>     def plot(self, a, b, c):
->>        '''Plot the line a * x ** 2 + b * x + c and output to the screen.
+>>        """Plot the line a * x ** 2 + b * x + c and output to the screen.
 >>        x runs between x_min and x_max, with 1000 intermediary points.
 >>        The line is plotted in the colour specified by color, and with width
->>        linewidth.'''
+>>        linewidth."""
 >>         super().plot([a, b, c])
 >> ~~~
 >> {: .language-python}
